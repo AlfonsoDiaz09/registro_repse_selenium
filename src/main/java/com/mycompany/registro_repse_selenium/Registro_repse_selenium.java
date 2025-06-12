@@ -34,7 +34,7 @@ import org.openqa.selenium.support.ui.Wait;
 public class Registro_repse_selenium {
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, IOException {
-        String razonSocialBuscar = "";
+        String razonSocialBuscar = "google";
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         ChromeDriver driver = new ChromeDriver(options);
@@ -160,7 +160,7 @@ public class Registro_repse_selenium {
         // Folio de registro
         WebElement folioRegistroElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[contains(text(), 'REGISTRO LOCALIZADO FOLIO:')]")));
         String textoFolio = folioRegistroElemento.getText();
-        String folioRegistro = textoFecha.replace("REGISTRO LOCALIZADO FOLIO:", "").trim();
+        String folioRegistro = textoFolio.replace("REGISTRO LOCALIZADO FOLIO:", "").trim();
         System.out.println("Folio Registro: " + folioRegistro);
         
         // Nombre o Razón Social
