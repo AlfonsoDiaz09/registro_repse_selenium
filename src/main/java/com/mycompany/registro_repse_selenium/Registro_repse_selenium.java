@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -185,22 +186,27 @@ public class Registro_repse_selenium {
         System.out.println("Aviso de registro N. / Fecha de aviso de registro: " + avisoRegistro);
         
         // Servicios brindados
-        WebElement serviciosBrindadosElemento = driver.findElement(
+        List<WebElement> serviciosBrindadosElemento = driver.findElements(
             By.xpath("//div[contains(@class, 'whitebox')][contains(., 'Ofreciendo los siguientes servicios')]//ul")
         );
-        String textoServiciosBrindados = serviciosBrindadosElemento.getText();
-        String serviciosBrindados = textoServiciosBrindados.replace("- ", "").trim();
-        System.out.println("Ofreciendo los siguientes servicios: \n" + serviciosBrindados);
+        List<String> listaServicios = new ArrayList<>();
+        for (WebElement ul : serviciosBrindadosElemento) {
+            String textoServiciosBrindados = ul.getText();
+            String serviciosBrindados = textoServiciosBrindados.replace("- ", "").trim();
+            if (!serviciosBrindados.isEmpty()) {
+                listaServicios.add(serviciosBrindados);
+            }
+        }
         
         // Creando RegistroRepseDTO
         RegistroRepseDto dto = new RegistroRepseDto(
             razonSocial,
             entidadMunicipio,
             avisoRegistro,
-            serviciosBrindados,
             folioRegistro,
             fechaConsulta,
-            fechaVigencia
+            fechaVigencia,
+            listaServicios
         );
 
         System.out.println(dto);

@@ -5,6 +5,7 @@
 package com.mycompany.registro_repse_selenium;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -14,33 +15,37 @@ public class RegistroRepseDto {
     private String razonSocial;
     private String entidadMunicipio;
     private String avisoRegistro;
-    private String serviciosBrindados;
     private String folioRegistro;
     private LocalDate fechaConsulta;
     private LocalDate fechaVigencia;
+    private List<String> serviciosBrindados;
 
     public RegistroRepseDto(String razonSocial, String entidadMunicipio, String avisoRegistro,
-                            String serviciosBrindados, String folioRegistro,
-                            LocalDate fechaConsulta, LocalDate fechaVigencia) {
+                            String folioRegistro, LocalDate fechaConsulta, LocalDate fechaVigencia,
+                            List<String> serviciosBrindados) {
         this.razonSocial = razonSocial;
         this.entidadMunicipio = entidadMunicipio;
         this.avisoRegistro = avisoRegistro;
-        this.serviciosBrindados = serviciosBrindados;
         this.folioRegistro = folioRegistro;
         this.fechaConsulta = fechaConsulta;
         this.fechaVigencia = fechaVigencia;
+        this.serviciosBrindados = serviciosBrindados;
     }
 
     @Override
     public String toString() {
-        return "RegistroRepseDto {" +
-            "\n  Nombre o Razón Social: " + razonSocial +
-            "\n  Entidad/Municipio: " + entidadMunicipio +
-            "\n  Aviso de Registro: " + avisoRegistro +
-            "\n  Servicios Brindados: \n    - " + serviciosBrindados.replace("\n", "\n    - ") +
-            "\n  Folio de Registro: " + folioRegistro +
-            "\n  Fecha de Consulta: " + fechaConsulta +
-            "\n  Vigencia del registro: " + fechaVigencia +
-            "\n}";
+        StringBuilder sb = new StringBuilder();
+        sb.append("####### Registro Repse DTO #######\n");
+        sb.append("Fecha de Consulta: " + fechaConsulta + "\n");
+        sb.append("Folio de Registro: " + folioRegistro + "\n");
+        sb.append("Nombre o Razón Social: " + razonSocial + "\n");
+        sb.append("Entidad/Municipio: " + entidadMunicipio + "\n");
+        sb.append("Aviso de Registro: " + avisoRegistro + "\n");
+        sb.append("Vigencia del registro: " + fechaVigencia + "\n");
+        sb.append("Servicios brindados: \n");
+        for (String servicio : serviciosBrindados) {
+            sb.append("   - " + servicio + "\n");
+        }
+        return sb.toString();
     }
 }
